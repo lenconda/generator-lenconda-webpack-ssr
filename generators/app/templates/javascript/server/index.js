@@ -10,8 +10,8 @@ const proxy = require('http-proxy-middleware');
 const connect = require('koa2-connect');
 const fs = require('fs-extra');
 
-
 const indexRouter = require('./routers/index');
+// <import-routers>
 
 const app = new Koa();
 
@@ -37,6 +37,7 @@ app.use(async (ctx, next) => {
 });
 
 app.use(indexRouter.routes()).use(indexRouter.allowedMethods());
+// <use-imported-routers>
 
 app.use(serve(path.join(__dirname, (config.isDev ? '../dev' : '../dist'))));
 app.use(kcors());

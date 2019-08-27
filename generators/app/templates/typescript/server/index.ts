@@ -11,6 +11,7 @@ import connect from 'koa2-connect';
 import fs from 'fs-extra';
 
 import indexRouter from './routers/index';
+// <import-routers>
 
 const app = new Koa();
 
@@ -36,6 +37,8 @@ app.use(async (ctx, next) => {
 });
 
 app.use(indexRouter.routes()).use(indexRouter.allowedMethods());
+// <use-imported-routers>
+
 app.use(serve(path.join(__dirname, '../server-bundle')));
 (config.isDev && app.use(serve(path.join(__dirname, '../dev/server-bundle'))));
 app.use(serve(path.join(__dirname, (config.isDev ? '../dev/' : '../'), './server-static')));
