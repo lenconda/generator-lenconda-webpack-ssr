@@ -19,3 +19,20 @@ describe('generator-lenconda-webpack-ssr:page with TypeScript', () => {
     assert.file('src/pages/example/index.tsx');
   });
 });
+
+describe('generator-lenconda-webpack-ssr:page with JavaScript', () => {
+  beforeEach(() => {
+    return helpers
+      .run(path.join(__dirname, '../generators/page'))
+      .withPrompts({
+        route: 'example',
+        typescript: false
+      });
+  });
+  
+  
+  it('creates page files', () => {
+    assert.file('src/pages/example/Page.jsx');
+    assert.file('src/pages/example/index.jsx');
+  });
+});
