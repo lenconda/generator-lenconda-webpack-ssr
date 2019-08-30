@@ -42,7 +42,7 @@ MIT © [lenconda](https://blog.lenconda.top)
 
 [npm-image]: https://badge.fury.io/js/generator-react-ssr.svg
 [npm-url]: https://npmjs.org/package/generator-react-ssr
-[travis-image]: https://travis-ci.com/lenconda/generator-react-ssr.svg?branch=master
+[travis-image]: https://api.travis-ci.org/lenconda/generator-react-ssr.svg?branch=master
 [travis-url]: https://travis-ci.com/lenconda/generator-react-ssr
 [daviddm-image]: https://david-dm.org/lenconda/generator-react-ssr.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/lenconda/generator-react-ssr
