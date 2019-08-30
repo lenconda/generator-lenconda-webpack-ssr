@@ -29,7 +29,6 @@
     "typescript": "3.2.4",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
-    "@types/axios": "^0.14.0",
     "@types/dotenv": "^6.1.1",
     "@types/fs-extra": "^8.0.0",
     "@types/http-proxy-middleware": "^0.19.2",
