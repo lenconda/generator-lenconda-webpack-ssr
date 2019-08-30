@@ -1,38 +1,50 @@
-# generator-lenconda-webpack-ssr [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> A Webpack SSR generator
+# generator-react-ssr 
+
+[![NPM version][npm-image]][npm-url] 
+[![Build Status][travis-image]][travis-url] 
+[![Dependency Status][daviddm-image]][daviddm-url] 
+[![Coverage percentage][coveralls-image]][coveralls-url]
+
+> A generator for server-side rendering with React and Webpack.
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-lenconda-webpack-ssr using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and generator-react-ssr using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
-npm install -g generator-lenconda-webpack-ssr
+npm install -g generator-react-ssr
 ```
 
-Then generate your new project:
+## Usage
+
+### Generate the Main Project
 
 ```bash
-yo lenconda-webpack-ssr
+yo react-ssr
 ```
 
-## Getting To Know Yeoman
+### Generate a Page
 
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
+```bash
+yo react-ssr:page
+```
+
+### Generate a Server Route
+
+```bash
+yo react-ssr:route
+```
 
 ## License
 
 MIT © [lenconda](https://blog.lenconda.top)
 
-
-[npm-image]: https://badge.fury.io/js/generator-lenconda-webpack-ssr.svg
-[npm-url]: https://npmjs.org/package/generator-lenconda-webpack-ssr
-[travis-image]: https://travis-ci.com/lenconda/generator-lenconda-webpack-ssr.svg?branch=master
-[travis-url]: https://travis-ci.com/lenconda/generator-lenconda-webpack-ssr
-[daviddm-image]: https://david-dm.org/lenconda/generator-lenconda-webpack-ssr.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/lenconda/generator-lenconda-webpack-ssr
-[coveralls-image]: https://coveralls.io/repos/lenconda/generator-lenconda-webpack-ssr/badge.svg
-[coveralls-url]: https://coveralls.io/r/lenconda/generator-lenconda-webpack-ssr
+[npm-image]: https://badge.fury.io/js/generator-react-ssr.svg
+[npm-url]: https://npmjs.org/package/generator-react-ssr
+[travis-image]: https://travis-ci.com/lenconda/generator-react-ssr.svg?branch=master
+[travis-url]: https://travis-ci.com/lenconda/generator-react-ssr
+[daviddm-image]: https://david-dm.org/lenconda/generator-react-ssr.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/lenconda/generator-react-ssr
+[coveralls-image]: https://coveralls.io/repos/lenconda/generator-react-ssr/badge.svg
+[coveralls-url]: https://coveralls.io/r/lenconda/generator-react-ssr
