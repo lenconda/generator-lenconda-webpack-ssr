@@ -1,8 +1,8 @@
 {
-  "name": "generator-lenconda-webpack-ssr",
-  "version": "0.0.0",
-  "description": "A Webpack SSR generator",
-  "homepage": "https://github.com/lenconda/generator-lenconda-webpack-ssr",
+  "name": "generator-react-ssr",
+  "version": "0.0.1",
+  "description": "A generator for server-side rendering with React and Webpack",
+  "homepage": "https://github.com/lenconda/generator-react-ssr",
   "author": {
     "name": "lenconda",
     "email": "i@lenconda.top",
