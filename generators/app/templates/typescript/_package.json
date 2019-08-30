@@ -27,8 +27,6 @@
   "typings": "./typings",
   "devDependencies": {
     "typescript": "3.2.4",
-    "typescript-eslint-parser": "^22.0.0",
-    "eslint-plugin-typescript": "^0.14.0",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
     "@types/axios": "^0.14.0",
