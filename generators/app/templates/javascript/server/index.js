@@ -12,7 +12,6 @@ const fs = require('fs-extra');
 const glob = require('glob');
 
 const indexRouter = require('./routers/index');
-// <import-routers>
 
 const app = new Koa();
 
