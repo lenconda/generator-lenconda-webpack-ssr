@@ -2,16 +2,21 @@
   "name": "<%= name %>",
   "version": "0.0.0",
   "description": "<%= description %>",
-  "main": "server/index.js",
   "license": "<%= license %>",
+  "repository": {
+    "type": "git",
+    "url": "<%= repository %>"
+  },
+  "author": "<%= author %>",
+  "bugs": {
+    "url": ""
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:webpack": "cross-env NODE_ENV=development webpack -wd --config src/config/webpack.config.js",
-    "dev:server": "cross-env NODE_ENV=development nodemon server/index.js",
     "start": "npm run dev:webpack | npm run dev:server",
     "build:bundle:dev": "cross-env NODE_ENV=development webpack --config src/config/webpack.config.js --mode development",
     "build:bundle:prod": "cross-env NODE_ENV=production webpack --config src/config/webpack.config.js --mode production",
-    "build": "npm run clean && npm run build:bundle:prod",
     "clean:dev": "node scripts/clean.js dev",
     "clean:prod": "node scripts/clean.js prod",
     "clean": "npm run clean:dev && npm run clean:prod"
@@ -45,7 +50,6 @@
     "mini-css-extract-plugin": "^0.8.0",
     "nodemon": "^1.19.1",
     "postcss-loader": "^3.0.0",
-    "style-loader": "^1.0.0",
     "terser-webpack-plugin": "^1.4.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "4.29.0",

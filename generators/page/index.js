@@ -23,8 +23,6 @@ module.exports = class extends Generator {
   }
 
   default() {
-    this.log('Copying files to /src/pages/' + this.props.route);
-
     if (this.props.typescript) {
       this.fs.copy(this.templatePath('typescript/Page.tsx'), this.destinationPath('src/pages/' + this.props.route + '/Page.tsx'));
       this.fs.copy(this.templatePath('typescript/index.tsx'), this.destinationPath('src/pages/' + this.props.route + '/index.tsx'));

@@ -16,7 +16,7 @@ function getEntries(searchPath, root) {
     return {
       name: value.split('/')[value.split('/').length - 2],
       path: path.resolve('./', value),
-      route: relativePath.split('/').filter((value, index) => value !== 'index.jsx').join('/')
+      route: relativePath.split('/').filter((value, index) => value !== 'index.js').join('/')
     };
   });
   return entries;
@@ -32,7 +32,7 @@ const pages = {
 };
 
 const entries = getEntries(
-  path.join(__dirname, '../pages/**/index.jsx'),
+  path.join(__dirname, '../pages/**/index.js'),
   path.join(__dirname, '../pages')
 );
 
@@ -70,7 +70,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', 'jsx']
+    extensions: ['.js', 'js']
   },
 
   module: {
@@ -78,14 +78,14 @@ module.exports = {
       {
         oneOf: [
           {
-            test: /\.(ts|js|tsx|jsx)?$/,
+            test: /\.(ts|js|tsx|js)?$/,
             exclude: /node_modules/,
             use: {
               loader: 'babel-loader'
             },
           },
           {
-            test: /\.(ts|js|tsx|jsx)?$/,
+            test: /\.(ts|js|tsx|js)?$/,
             exclude: /node_modules/,
             loader: require.resolve('babel-loader'),
             options: {
