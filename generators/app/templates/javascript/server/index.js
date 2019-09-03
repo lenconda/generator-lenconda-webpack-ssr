@@ -9,6 +9,7 @@ const serve = require('koa-static');
 const proxy = require('http-proxy-middleware');
 const connect = require('koa2-connect');
 const fs = require('fs-extra');
+const glob = require('glob');
 
 const indexRouter = require('./routers/index');
 // <import-routers>
@@ -37,7 +38,18 @@ app.use(async (ctx, next) => {
 });
 
 app.use(indexRouter.routes()).use(indexRouter.allowedMethods());
-// <use-imported-routers>
+glob
+  .sync(path.join(__dirname, './routers/**/index.*'), {
+    realpath: true,
+    absolute: false
+  })
+  .map((entry, index) => path.dirname(entry))
+  .map((entry, index) => path.relative(path.join(__dirname, './routers'), entry))
+  .filter((entry, index) => entry !== '')
+  .forEach((entry, index) => {
+    const router = require('./routers/' + entry);
+    app.use(router.routes()).use(router.allowedMethods());
+  });
 
 app.use(serve(path.join(__dirname, (config.isDev ? '../dev' : '../dist'))));
 app.use(kcors());

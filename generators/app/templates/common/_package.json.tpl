@@ -64,6 +64,7 @@
     "handlebars": "^4.1.2",
     "http-proxy-middleware": "^0.19.1",
     "kcors": "^2.2.2",
+    "glob": "^7.1.4",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.1",

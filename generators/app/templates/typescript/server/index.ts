@@ -9,9 +9,9 @@ import serve from 'koa-static';
 import proxy from 'http-proxy-middleware';
 import connect from 'koa2-connect';
 import fs from 'fs-extra';
+import glob from 'glob';
 
 import indexRouter from './routers/index';
-// <import-routers>
 
 const app = new Koa();
 
@@ -37,7 +37,18 @@ app.use(async (ctx, next) => {
 });
 
 app.use(indexRouter.routes()).use(indexRouter.allowedMethods());
-// <use-imported-routers>
+glob
+  .sync(path.join(__dirname, './routers/**/index.*'), {
+    realpath: true,
+    absolute: false
+  })
+  .map((entry, index) => path.dirname(entry))
+  .map((entry, index) => path.relative(path.join(__dirname, './routers'), entry))
+  .filter((entry, index) => entry !== '')
+  .forEach((entry, index) => {
+      import('./routers/' + entry)
+        .then(route => app.use(route.default.routes()).use(route.default.allowedMethods()));
+  });
 
 app.use(serve(path.join(__dirname, '../server-bundle')));
 (config.isDev && app.use(serve(path.join(__dirname, '../dev/server-bundle'))));
