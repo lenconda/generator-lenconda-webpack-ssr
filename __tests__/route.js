@@ -3,10 +3,10 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-describe('generator-react-ssr:page with TypeScript', () => {
+describe('generator-react-ssr:route with TypeScript', () => {
   beforeAll(() => {
     return helpers
-      .run(path.join(__dirname, '../generators/page'))
+      .run(path.join(__dirname, '../generators/route'))
       .withPrompts({
         name: 'example',
         typescript: true,
@@ -15,7 +15,7 @@ describe('generator-react-ssr:page with TypeScript', () => {
   });
 
   it('creates files', () => {
-    assert.file('index.tsx');
+    assert.file('index.ts');
   });
 });
 
