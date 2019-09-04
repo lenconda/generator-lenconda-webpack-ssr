@@ -50,7 +50,7 @@ const typescriptDevDependencies = {
   '@types/koa-static': '^4.0.1',
   '@types/koa-views': '^2.0.3',
   '@types/react': '16.7.22',
-  "@types/glob": "^7.1.1",
+  '@types/glob': '^7.1.1',
   '@types/react-dom': '16.0.11',
   '@types/react-router': '^5.0.3',
   '@types/react-router-dom': '^4.3.4',
