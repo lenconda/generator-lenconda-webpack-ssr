@@ -1,6 +1,6 @@
 {
   "name": "@lenconda/generator-react-ssr",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A generator for server-side rendering with React and Webpack",
   "homepage": "https://github.com/lenconda/generator-react-ssr",
   "author": {
