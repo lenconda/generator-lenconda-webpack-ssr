@@ -15,7 +15,7 @@ import indexRouter from './routers/index';
 
 const app = new Koa();
 
-app.use(views(path.join(__dirname, config.isDev ? '../dev/server-templates' : '../server-templates'), {
+app.use(views(path.join(__dirname, (config.isDev ? '../dev/' : '../') + 'server-templates'), {
   map: {
     html: 'handlebars'
   }
@@ -50,8 +50,7 @@ glob
         .then(route => app.use(route.default.routes()).use(route.default.allowedMethods()));
   });
 
-app.use(serve(path.join(__dirname, '../server-bundle')));
-(config.isDev && app.use(serve(path.join(__dirname, '../dev/server-bundle'))));
+app.use(serve(path.join(__dirname, (config.isDev ? '../dev/' : '../'), './server-bundle')));
 app.use(serve(path.join(__dirname, (config.isDev ? '../dev/' : '../'), './server-static')));
 app.use(kcors());
 app.use(bodyParser());

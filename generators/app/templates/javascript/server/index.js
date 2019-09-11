@@ -15,7 +15,7 @@ const indexRouter = require('./routers/index');
 
 const app = new Koa();
 
-app.use(views(path.join(__dirname, config.isDev ? '../dev/server-templates' : '../server-templates'), {
+app.use(views(path.join(__dirname, (config.isDev ? '../dev/' : '../') + 'server-templates'), {
   map: {
     html: 'handlebars'
   }
