@@ -59,7 +59,7 @@ const typescriptDevDependencies = {
 
 const javascriptNpmScripts = {
   'dev:server': 'cross-env NODE_ENV=development nodemon server/index.js',
-  'build': 'npm run clean && npm run build:bundle:prod',
+  'build': 'npm run clean && npm run build:bundle:prod && node scripts/copy.js',
 };
 const typescriptNpmScripts = {
   'dev:server': 'cross-env NODE_ENV=development nodemon server/index.ts',

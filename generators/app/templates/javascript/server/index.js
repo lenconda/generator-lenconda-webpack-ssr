@@ -15,7 +15,7 @@ const indexRouter = require('./routers/index');
 
 const app = new Koa();
 
-app.use(views(path.join(__dirname, config.isDev ? '../dev' : '../dist'), {
+app.use(views(path.join(__dirname, config.isDev ? '../dev/server-templates' : '../server-templates'), {
   map: {
     html: 'handlebars'
   }
@@ -50,7 +50,8 @@ glob
     app.use(router.routes()).use(router.allowedMethods());
   });
 
-app.use(serve(path.join(__dirname, (config.isDev ? '../dev' : '../dist'))));
+app.use(serve(path.join(__dirname, (config.isDev ? '../dev/' : '../'), './server-bundle')));
+app.use(serve(path.join(__dirname, (config.isDev ? '../dev/' : '../'), './server-static')));
 app.use(kcors());
 app.use(bodyParser());
 if (config.isDev) app.use(logger());

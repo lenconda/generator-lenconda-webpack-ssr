@@ -48,7 +48,7 @@ module.exports = {
   output: {
     path: path.join(
       __dirname,
-      (config.isDev ? '../../dev/' : '../../dist/')
+      (config.isDev ? '../../dev/' : '../../dist/') + 'server-bundle'
     ),
     filename: 'static/js/' + (config.isDev ? '[name]-routes.js' : '[name]-routes.[contenthash].js'),
     chunkFilename: 'static/js/' + (config.isDev ? '[name].chunk.js' : '[name].[contenthash].chunk.js'),
@@ -118,7 +118,7 @@ module.exports = {
       return new HtmlWebpackPlugin({
         filename: path.join(
           __dirname,
-          (config.isDev ? '../../dev/' : '../../dist/'),
+          (config.isDev ? '../../dev/' : '../../dist/') + 'server-templates/',
           value.route === '' ? 'index.html' : value.route + '/index.html'
         ),
         template:
@@ -144,7 +144,7 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../assets/'),
-        to: path.resolve(__dirname, (config.isDev ? '../../dev/' : '../../dist/') + './assets')
+        to: path.resolve(__dirname, (config.isDev ? '../../dev/' : '../../dist/') + 'server-static/assets')
       }
     ]),
 
