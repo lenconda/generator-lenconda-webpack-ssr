@@ -1,7 +1,5 @@
-'use strict';
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
-const yosay = require('yosay');
 const mkdirp = require('mkdirp');
 const path = require('path');
 
@@ -38,11 +36,7 @@ module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(
-      yosay(
-        `Welcome to the first-rate ${chalk.red(
-          '@lenconda/generator-react-ssr'
-        )} generator!`
-      )
+      `Welcome to the first-rate ${chalk.cyan('@lenconda/generator-react-ssr')} generator!`
     );
 
     const prompts = [
@@ -60,6 +54,12 @@ module.exports = class extends Generator {
       },
       {
         type: 'input',
+        name: 'version',
+        message: 'Input your project version',
+        default: '0.0.1'
+      },
+      {
+        type: 'input',
         name: 'repository',
         message: 'Input your project git repository',
         default: ''
@@ -71,15 +71,9 @@ module.exports = class extends Generator {
         default: ''
       },
       {
-        type: 'confirm',
-        name: 'typescript',
-        message: 'Would you like to use TypeScript?',
-        default: true
-      },
-      {
         type: 'list',
         name: 'preprocessor',
-        message: 'Which CSS preprocessor would you like to choose?',
+        message: 'Which CSS pre-processor would you like to choose?',
         choices: [
           { value: PREPROCESS_ORIGINAL, name: 'Original CSS' },
           { value: PREPROCESS_SASS, name: 'Sass / Scss' },
@@ -103,8 +97,7 @@ module.exports = class extends Generator {
 
   default() {
     if (path.basename(this.destinationPath()) !== this.props.name) {
-      this.log(`\nYour generator must be inside a folder named 
-        ${this.props.name}\n
+      this.log(`\nYour generator must be inside a folder named ${this.props.name}\n
         The generator ${chalk.yellow('will automatically create the folder in this directory')}.\n`);
 
       mkdirp(this.props.name);
@@ -114,10 +107,11 @@ module.exports = class extends Generator {
 
   writing() {
     this.fs.copyTpl(
-      this.templatePath('common/_package.json.tpl'),
+      this.templatePath('package.json.tpl'),
       this.destinationPath('package.json'),
       {
         name: this.props.name,
+        version: this.props.version,
         license: this.props.license,
         description: this.props.description,
         repository: this.props.repository,
@@ -128,46 +122,58 @@ module.exports = class extends Generator {
     if (this.props.preprocessor !== 'css')
       this.fs.extendJSON(this.destinationPath('package.json'), styleDependencies[this.props.preprocessor]);
 
-    this.fs.copy(this.templatePath('common/scripts'), this.destinationPath('scripts'));
-    this.fs.copy(this.templatePath('common/_.gitignore'), this.destinationPath('.gitignore'));
-    this.fs.copy(this.templatePath('common/postcss.config.js'), this.destinationPath('postcss.config.js'));
-    this.fs.copy(this.templatePath('common/src/config/_config.js'), this.destinationPath('src/config/config.js'));
-    this.fs.copyTpl(
-      this.templatePath('common/src/pages/index.' + (this.props.typescript ? 'tsx' : 'js')) + '.tpl',
-      this.destinationPath('src/pages/index.' + (this.props.typescript ? 'tsx' : 'js')), 
-      {
-        extension: this.props.preprocessor
-      }
-    );
+    // /
+    this.fs.copy(this.templatePath('.gitignore.tpl'), this.destinationPath('.gitignore'));
+    this.fs.copy(this.templatePath('config.json.tpl'), this.destinationPath('config.json'));
+    this.fs.copy(this.templatePath('postcss.config.js.tpl'), this.destinationPath('postcss.config.js'));
+    this.fs.copy(this.templatePath('tsconfig.json.tpl'), this.destinationPath('tsconfig.json'));
+    this.fs.copy(this.templatePath('.babelrc.tpl'), this.destinationPath('.babelrc'));
+    this.fs.copy(this.templatePath('.eslintrc.js.tpl'), this.destinationPath('.eslintrc.js'));
+
+    // /src
+    this.fs.copy(this.templatePath('src/index.tsx.tpl'), this.destinationPath('src/index.tsx'));
     this.fs.copy(
-      this.templatePath('common/src/pages/index.' + this.props.preprocessor), 
-      this.destinationPath('src/pages/index.' + this.props.preprocessor)
+      this.templatePath('src/index.' + this.props.preprocessor + '.tpl'),
+      this.destinationPath('src/index.' + this.props.preprocessor)
     );
+
+    // /src/config
+    this.fs.copy(this.templatePath('src/config/webpack.config.js.tpl'), this.destinationPath('src/config/webpack.config.js'));
+    this.fs.copy(this.templatePath('src/config/env.js.tpl'), this.destinationPath('src/config/env.js'));
     this.fs.copy(
-      this.templatePath('common/src/config/_' + this.props.preprocessor + '_loader.js'), 
+      this.templatePath('src/config/' + this.props.preprocessor + '_loaders.js.tpl'),
       this.destinationPath('src/config/css_loaders.js')
     );
 
-    if (this.props.typescript) {
-      this.fs.extendJSON(this.destinationPath('package.json'), {
-        devDependencies: typescriptDevDependencies,
-        scripts: typescriptNpmScripts
-      });
-      this.fs.copy(this.templatePath('typescript/_tsconfig.json'), this.destinationPath('tsconfig.json'));
-      this.fs.copy(this.templatePath('typescript/_.babelrc'), this.destinationPath('.babelrc'));
-      this.fs.copy(this.templatePath('typescript/_.eslintrc.js'), this.destinationPath('.eslintrc.js'));
-      this.fs.copy(this.templatePath('typescript/src'), this.destinationPath('src'));
-      this.fs.copy(this.templatePath('typescript/server'), this.destinationPath('server'));
-      this.fs.copy(this.templatePath('typescript/typings'), this.destinationPath('typings'));
-    } else {
-      this.fs.extendJSON(this.destinationPath('package.json'), {
-        scripts: javascriptNpmScripts
-      });
-      this.fs.copy(this.templatePath('javascript/src'), this.destinationPath('src'));
-      this.fs.copy(this.templatePath('javascript/server'), this.destinationPath('server'));
-      this.fs.copy(this.templatePath('javascript/_.babelrc'), this.destinationPath('.babelrc'));
-      this.fs.copy(this.templatePath('javascript/_.eslintrc.js'), this.destinationPath('.eslintrc.js'));
-    }
+    // /src/pages
+    this.fs.copy(this.templatePath('src/pages/hello/index.tsx.tpl'), this.destinationPath('src/pages/hello/index.tsx'));
+
+    // /src/assets
+    this.fs.copy(this.templatePath('src/assets/css/reset.css.tpl'), this.destinationPath('src/assets/css/reset.css'));
+
+    // /src/utils
+    this.fs.copy(this.templatePath('src/utils/http.ts.tpl'), this.destinationPath('src/utils/http.ts'));
+
+    // /templates
+    this.fs.copy(this.templatePath('templates/index.html.tpl'), this.destinationPath('templates/index.html'));
+
+    // /typings
+    this.fs.copy(this.templatePath('typings/koa2-connect.d.ts.tpl'), this.destinationPath('typings/koa2-connect.d.ts'));
+
+    // /server
+    this.fs.copy(this.templatePath('server/index.ts.tpl'), this.destinationPath('server/index.ts'));
+    this.fs.copy(this.templatePath('server/config.ts.tpl'), this.destinationPath('server/config.ts'));
+
+    // /server/middlewares
+    this.fs.copy(this.templatePath('server/middlewares/render.ts.tpl'), this.destinationPath('server/middlewares/render.ts'));
+
+    // /server/routers
+    this.fs.copy(this.templatePath('server/routers/index.ts.tpl'), this.destinationPath('server/routers/index.ts'));
+
+    // /server/utils
+    this.fs.copy(this.templatePath('server/utils/entries.ts.tpl'), this.destinationPath('server/utils/entries.ts'));
+    this.fs.copy(this.templatePath('server/utils/http.ts.tpl'), this.destinationPath('server/utils/http.ts'));
+    this.fs.copy(this.templatePath('server/utils/template.ts.tpl'), this.destinationPath('server/utils/template.ts'));
   }
 
   install() {
