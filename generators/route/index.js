@@ -15,13 +15,7 @@ module.exports = class extends Generator {
         name: 'prefix',
         message: 'Input your route prefix name',
         default: '/example'
-      },
-      {
-        type: 'confirm',
-        name: 'typescript',
-        message: 'Is the project written in TypeScript?',
-        default: true
-      },
+      }
     ];
 
     return this.prompt(prompts).then(props => {
@@ -37,11 +31,11 @@ module.exports = class extends Generator {
 
   writing() {
     this.fs.copyTpl(
-      this.templatePath('index.' + (this.props.typescript ? 'ts' : 'js') + '.tpl'),
-      this.destinationPath('index.' + (this.props.typescript ? 'ts' : 'js')),
+      this.templatePath('index.ts.tpl'),
+      this.destinationPath('index.ts'),
       {
         prefix: this.props.prefix
       }
     );
   }
-}
+};

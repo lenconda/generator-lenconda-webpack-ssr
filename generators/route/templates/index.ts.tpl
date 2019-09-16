@@ -5,7 +5,7 @@ const router = new Router({
 });
 
 router.get('/', async (ctx, next) => {
-  ctx.body = 'It works!';
+  // do some rendering
 });
 
 export default router;
