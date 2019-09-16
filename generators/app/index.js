@@ -34,40 +34,6 @@ const styleDependencies = {
   styl: DEPENDENCIES_STYLUS
 };
 
-const typescriptDevDependencies = {
-  typescript: '3.2.4',
-  'ts-node': '^8.3.0',
-  '@typescript-eslint/eslint-plugin': '^1.13.0',
-  '@typescript-eslint/parser': '^1.13.0',
-  '@types/dotenv': '^6.1.1',
-  '@types/fs-extra': '^8.0.0',
-  '@types/http-proxy-middleware': '^0.19.2',
-  '@types/kcors': '^2.2.3',
-  '@types/koa': '^2.0.49',
-  '@types/koa-bodyparser': '^4.3.0',
-  '@types/koa-logger': '^3.1.1',
-  '@types/koa-router': '^7.0.42',
-  '@types/koa-static': '^4.0.1',
-  '@types/koa-views': '^2.0.3',
-  '@types/react': '16.7.22',
-  '@types/glob': '^7.1.1',
-  '@types/react-dom': '16.0.11',
-  '@types/react-router': '^5.0.3',
-  '@types/react-router-dom': '^4.3.4',
-  '@babel/preset-typescript': '7.1.0',
-};
-
-const javascriptNpmScripts = {
-  'dev:server': 'cross-env NODE_ENV=development nodemon server/index.js',
-  'build': 'npm run clean && npm run build:bundle:prod && node scripts/copy.js',
-};
-const typescriptNpmScripts = {
-  'dev:server': 'cross-env NODE_ENV=development nodemon server/index.ts',
-  'build:bundle': 'webpack --config src/config/webpack.config.js',
-  'build:server': 'cross-env NODE_ENV=production tsc --build tsconfig.json',
-  'build': 'npm run clean && npm run build:bundle:prod && npm run build:server',
-}
-
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
