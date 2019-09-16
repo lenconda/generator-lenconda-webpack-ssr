@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.<%= preprocessor %>'
 
 const <%= pageName %>Page = (): JSX.Element => {
   return (

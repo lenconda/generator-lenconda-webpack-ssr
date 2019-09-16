@@ -1,6 +1,11 @@
 const Generator = require('yeoman-generator');
 const mkdirp = require('mkdirp');
 
+const PREPROCESS_SASS = 'scss';
+const PREPROCESS_LESS = 'less';
+const PREPROCESS_STYLUS = 'styl';
+const PREPROCESS_ORIGINAL = 'css';
+
 module.exports = class extends Generator {
   prompting() {
     const prompts = [
@@ -17,11 +22,17 @@ module.exports = class extends Generator {
         default: 'root'
       },
       {
-        type: 'confirm',
-        name: 'typescript',
-        message: 'Is the project written in TypeScript?',
-        default: true
-      },
+        type: 'list',
+        name: 'preprocessor',
+        message: 'Which CSS pre-processor would you like to choose?',
+        choices: [
+          { value: PREPROCESS_ORIGINAL, name: 'Original CSS' },
+          { value: PREPROCESS_SASS, name: 'Sass / Scss' },
+          { value: PREPROCESS_LESS, name: 'Less' },
+          { value: PREPROCESS_STYLUS, name: 'Stylus' }
+        ],
+        default: PREPROCESS_ORIGINAL
+      }
     ];
 
     return this.prompt(prompts).then(props => {
@@ -38,12 +49,15 @@ module.exports = class extends Generator {
 
   writing() {
     this.fs.copyTpl(
-      this.templatePath('index.' + (this.props.typescript ? 'tsx' : 'js') + '.tpl'),
-      this.destinationPath('index.' + (this.props.typescript ? 'tsx' : 'js')),
+      this.templatePath('index.tsx.tpl'),
+      this.destinationPath('index.tsx'),
       {
         pageName: this.props.pageName,
-        entryPoint: this.props.entrypoint
+        entryPoint: this.props.entrypoint,
+        preprocessor: this.props.preprocessor
       }
     );
+
+    this.fs.write(this.destinationPath('index.' + this.props.preprocessor), '');
   }
-}
+};
