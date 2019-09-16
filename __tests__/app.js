@@ -32,7 +32,7 @@ describe('generator-react-ssr:app general', () => {
     assert.file('scripts/clean.js');
     assert.file('src/assets/css/reset.css');
   });
-  
+
   it('creates package.json with name of "example"', () => {
     assert.jsonFileContent('package.json', { name: 'example' });
   });
@@ -148,7 +148,7 @@ describe('generator-react-ssr:app with CSS', () => {
         license: 'MIT'
       })
   });
-  
+
   it('ONLY uses css-loader', () => {
     assert.fileContent('src/config/css_loaders.js', /css-loader/);
     assert.noFileContent('src/config/css_loaders.js', /sass-loader/);
@@ -171,7 +171,7 @@ describe('generator-react-ssr:app with Sass / Scss', () => {
         license: 'MIT'
       })
   });
-  
+
   it('uses sass-loader', () => {
     assert.fileContent('src/config/css_loaders.js', /sass-loader/);
     assert.noFileContent('src/config/css_loaders.js', /less-loader/);
@@ -193,7 +193,7 @@ describe('generator-react-ssr:app with Less', () => {
         license: 'MIT'
       })
   });
-  
+
   it('uses less-loader', () => {
     assert.noFileContent('src/config/css_loaders.js', /sass-loader/);
     assert.fileContent('src/config/css_loaders.js', /less-loader/);
@@ -215,7 +215,7 @@ describe('generator-react-ssr:app with Stylus', () => {
         license: 'MIT'
       })
   });
-  
+
   it('uses stylus-loader', () => {
     assert.noFileContent('src/config/css_loaders.js', /sass-loader/);
     assert.noFileContent('src/config/css_loaders.js', /less-loader/);
