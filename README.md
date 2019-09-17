@@ -1,11 +1,13 @@
-# generator-react-ssr 
+# generator-react-ssr
 
-[![NPM version][npm-image]][npm-url] 
-[![Build Status][travis-image]][travis-url] 
-[![Dependency Status][daviddm-image]][daviddm-url] 
+[![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Dependency Status][daviddm-image]][daviddm-url]
 [![Coverage percentage][coveralls-image]][coveralls-url]
 
 > A generator for server-side rendering with React and Webpack.
+
+Boilerplate [here](https://github.com/lenconda/generator-react-ssr).
 
 ## Installation
 
@@ -21,19 +23,19 @@ npm install -g generator-react-ssr
 ### Generate the Main Project
 
 ```bash
-yo react-ssr
+yo @lenconda/react-ssr
 ```
 
 ### Generate a Page
 
 ```bash
-yo react-ssr:page
+yo @lenconda/react-ssr:page
 ```
 
 ### Generate a Server Route
 
 ```bash
-yo react-ssr:route
+yo @lenconda/react-ssr:route
 ```
 
 ## License
