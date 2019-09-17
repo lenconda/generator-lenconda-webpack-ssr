@@ -61,6 +61,7 @@
     "copy-webpack-plugin": "^5.0.3",
     "cross-env": "^5.2.0",
     "css-loader": "2.1.0",
+    "css-hot-loader": "^1.4.4",
     "eslint": "^6.1.0",
     "eslint-config-alloy": "^2.0.5",
     "eslint-plugin-react": "^7.14.3",
