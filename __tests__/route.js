@@ -3,34 +3,21 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-describe('generator-react-ssr:route with TypeScript', () => {
+describe('generator-react-ssr:route', () => {
   beforeAll(() => {
     return helpers
       .run(path.join(__dirname, '../generators/route'))
       .withPrompts({
         name: 'example',
-        typescript: true,
-        entrypoint: 'root'
+        prefix: '/example'
       });
   });
 
   it('creates files', () => {
     assert.file('index.ts');
   });
-});
 
-describe('generator-react-ssr:page with JavaScript', () => {
-  beforeAll(() => {
-    return helpers
-      .run(path.join(__dirname, '../generators/page'))
-      .withPrompts({
-        name: 'example',
-        typescript: false,
-        entrypoint: 'root'
-      });
-  });
-
-  it('creates files', () => {
-    assert.file('index.js');
+  it('inserts correct router prefix', () => {
+    assert.fileContent('index.ts', /prefix: \'\/example\'/);
   });
 });

@@ -74,7 +74,7 @@
   },
   "scripts": {
     "pretest": "eslint .",
-    "test": "exit 0"
+    "test": "jest"
   },
   "repository": "lenconda/generator-lenconda-webpack-ssr",
   "license": "MIT"

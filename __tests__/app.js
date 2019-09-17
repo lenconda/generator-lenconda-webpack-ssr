@@ -9,6 +9,7 @@ describe('generator-react-ssr:app general', () => {
       .run(path.join(__dirname, '../generators/app'))
       .withPrompts({
         name: 'example',
+        version: '1.0.0',
         description: 'example',
         repository: 'example',
         author: 'example',
@@ -19,18 +20,34 @@ describe('generator-react-ssr:app general', () => {
   });
 
   it('creates files', () => {
+    // /
     assert.file('package.json');
+    assert.file('config.json');
     assert.file('postcss.config.js');
     assert.file('.babelrc');
+    assert.file('tsconfig.json');
     assert.file('.eslintrc.js');
-    assert.file('src/config/css_loaders.js');
-    assert.file('src/config/config.js');
-    assert.file('src/config/webpack.config.js');
-    assert.file('src/templates/index.html');
-    assert.file('src/templates/effects/loading.html');
-    assert.file('src/templates/parts/head.html');
-    assert.file('scripts/clean.js');
+    assert.file('.gitignore');
+
+    // /templates
+    assert.file('templates/index.html');
+
+    // /src
+    assert.file('src/index.tsx');
+
+    // /src/assets/css
     assert.file('src/assets/css/reset.css');
+
+    // /src/config
+    assert.file('src/config/css_loaders.js');
+    assert.file('src/config/env.js');
+    assert.file('src/config/webpack.config.js');
+
+    // /src/pages
+    assert.file('src/pages/hello/index.tsx');
+
+    // /src/utils
+    assert.file('src/utils/http.ts');
   });
 
   it('creates package.json with name of "example"', () => {
@@ -49,97 +66,22 @@ describe('generator-react-ssr:app general', () => {
     assert.jsonFileContent('package.json', { author: 'example' });
   });
 
+  it('creates package.json with version of "1.0.0"', () => {
+    assert.jsonFileContent('package.json', { version: '1.0.0' });
+  });
+
   it('creates package.json with license of "MIT"', () => {
     assert.jsonFileContent('package.json', { license: 'MIT' });
   });
 });
 
-describe('generator-react-ssr:app with JavaScript', () => {
+describe('generator-react-ssr:app using CSS', () => {
   beforeAll(() => {
     return helpers
       .run(path.join(__dirname, '../generators/app'))
       .withPrompts({
         name: 'example',
-        description: 'example',
-        repository: 'example',
-        author: 'example',
-        typescript: false,
-        preprocessor: 'css',
-        license: 'MIT'
-      })
-  });
-
-  it('creates files', () => {
-    assert.file('src/pages/index.js');
-    assert.file('src/utils/http.js');
-    assert.file('server/config.js');
-    assert.file('server/index.js');
-    assert.file('server/routers/index.js');
-    assert.file('server/utils/http.js');
-  });
-
-  it('does not generate tsconfig.json', () => {
-    assert.noFile('tsconfig.json');
-  });
-
-  it('does not use @babel/typescript as preset', () => {
-    assert.noFileContent('package.json', /@babel\/typescript/);
-  });
-
-  it('does not contains @type-prefixed packages', () => {
-    assert.noFileContent('package.json', /@types/);
-  });
-
-  it('does not contains @typescript-eslint-prefixed dependencies in .eslintrc.js', () => {
-    assert.noFileContent('.eslintrc.js', /@typescript-eslint/);
-  });
-});
-
-describe('generator-react-ssr:app with TypeScript', () => {
-  beforeAll(() => {
-    return helpers
-      .run(path.join(__dirname, '../generators/app'))
-      .withPrompts({
-        name: 'example',
-        description: 'example',
-        repository: 'example',
-        author: 'example',
-        typescript: true,
-        preprocessor: 'css',
-        license: 'MIT'
-      })
-  });
-
-  it('creates files', () => {
-    assert.file('src/pages/index.tsx');
-    assert.file('src/utils/http.ts');
-    assert.file('tsconfig.json');
-    assert.file('typings/koa2-connect.d.ts');
-    assert.file('server/config.ts');
-    assert.file('server/index.ts');
-    assert.file('server/routers/index.ts');
-    assert.file('server/utils/http.ts');
-  });
-
-  it('uses @babel/typescript as preset', () => {
-    assert.fileContent('.babelrc', /@babel\/typescript/);
-  });
-
-  it('contains @types-prefixed packages', () => {
-    assert.fileContent('package.json', /@types/);
-  });
-
-  it('contains @typescript-eslint-prefixed dependencies in .eslintrc.js', () => {
-    assert.fileContent('.eslintrc.js', /@typescript-eslint/);
-  });
-});
-
-describe('generator-react-ssr:app with CSS', () => {
-  beforeAll(() => {
-    return helpers
-      .run(path.join(__dirname, '../generators/app'))
-      .withPrompts({
-        name: 'example',
+        version: '1.0.0',
         description: 'example',
         repository: 'example',
         author: 'example',
@@ -163,6 +105,7 @@ describe('generator-react-ssr:app with Sass / Scss', () => {
       .run(path.join(__dirname, '../generators/app'))
       .withPrompts({
         name: 'example',
+        version: '1.0.0',
         description: 'example',
         repository: 'example',
         author: 'example',
@@ -185,6 +128,7 @@ describe('generator-react-ssr:app with Less', () => {
       .run(path.join(__dirname, '../generators/app'))
       .withPrompts({
         name: 'example',
+        version: '1.0.0',
         description: 'example',
         repository: 'example',
         author: 'example',
@@ -207,6 +151,7 @@ describe('generator-react-ssr:app with Stylus', () => {
       .run(path.join(__dirname, '../generators/app'))
       .withPrompts({
         name: 'example',
+        version: '1.0.0',
         description: 'example',
         repository: 'example',
         author: 'example',
