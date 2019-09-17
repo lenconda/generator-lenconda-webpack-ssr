@@ -14,4 +14,4 @@ exports = module.exports = {
     'postcss-loader',
     'stylus-loader'
   ]
-}
+};
